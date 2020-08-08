@@ -40,7 +40,10 @@ server.use(session(sessionConfig));
 server.use('/api/tips', tipsRouter);
 server.use('/api/guides', guidesRouter)
 
-server.get("/", (req, res) => res.json({ message: "Hey your API is up" }));
-
+server.use('/', (req, res) => {
+    res.send(`
+        <h2>Hey your API is up</h2>
+    `);
+  });
 
 module.exports = server;
