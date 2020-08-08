@@ -27,9 +27,24 @@ router.post('/', (req, res) => {
     .catch((err) => console.log(err));
 });
 
-// router.put('/:id', (req, res) => {
 
-// });
+// Put Requests
+
+router.put('/:id', (req, res) => {
+    const {id} = req.params;
+    const changes = req.body;
+    db('guides')
+      .where('id', id)
+      .update(changes)
+      .then(count => {
+        if (count > 0) {
+          res.status(200).json({message: 'record numbers changed:', count});
+        } else {
+          res.status(404).json({message: 'That id does not exist, can not update record'});
+        }
+      })
+      .catch((err) => console.log(err));
+});
 
 // router.delete('/:id', (req, res) => {
 
