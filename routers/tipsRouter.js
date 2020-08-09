@@ -33,12 +33,41 @@ router.post('/', (req, res) => {
     .catch((err) => console.log(err));
 });
 
-// router.put('/:id', (req, res) => {
 
-// });
+// Put Requests
 
-// router.delete('/:id', (req, res) => {
+router.put('/:id', (req, res) => {
+    const {id} = req.params;
+    const changes = req.body;
+    db('tips')
+      .where('id', id)
+      .update(changes)
+      .then(count => {
+        if (count > 0) {
+          res.status(200).json({message: "Record numbers changed:", count});
+        } else {
+          res.status(404).json({message: "that id does not exist, can not update record"});
+        }
+      })
+      .catch((err) => console.log(err));
+});
 
-// });
+
+// Delete Requests
+
+router.delete('/:id', (req, res) => {
+    const {id} = req.params;
+    db('tips')
+      .where('id', id)
+      .delete()
+      .then(count => {
+        if (count > 0) {
+          res.status(200).json({message: "Number of recors deleted", count});
+        } else {
+          res.status(404).json({message: "That is not a valid id.  Can not delete"});
+        }
+      })
+      .catch((err) => console.log(err));
+});
 
 module.exports = router;
