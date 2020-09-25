@@ -1,13 +1,15 @@
+const path = require('path');
 const express = require('express');
 const helmet = require('helmet');
 const cors = require('cors');
 const session = require('express-session');
 const knexSessionStore = require('connect-session-knex')(session);
+const app = express();
 
 const tipsRouter = require('./routers/tipsRouter.js');
 const guidesRouter = require('./routers/guidesRouter.js');
 
-const server = express();
+// const server = express();
 
 const sessionConfig = {
     name: 'auth',
@@ -30,20 +32,30 @@ const sessionConfig = {
     )
 };
 
-server.use(helmet());
-server.use(express.json());
-server.use(cors());
+// server.use(helmet());
+// server.use(express.json());
+// server.use(cors());
 
-server.use(session(sessionConfig));
+app.use(helmet());
+app.use(express.json());
+app.use(cors());
 
+// server.use(session(sessionConfig));
 
-server.use('/api/tips', tipsRouter);
-server.use('/api/guides', guidesRouter)
+app.use(session(sessionConfig));
 
-server.use('/', (req, res) => {
-    res.send(`
-        <h2>Hey your API is up</h2>
-    `);
-  });
+// server.use('/api/tips', tipsRouter);
+// server.use('/api/guides', guidesRouter);
 
-module.exports = server;
+app.use('/api/tips', tipsRouter);
+app.use('/api/guides', guidesRouter);
+
+app.use(express.static('public'));
+
+// server.use('/', (req, res) => {
+//     res.send(`
+//         <h2>Hey your API is up</h2>
+//     `);
+//   });
+
+module.exports = app;
