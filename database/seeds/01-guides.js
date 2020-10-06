@@ -6,6 +6,9 @@ exports.seed = function(knex, Promise) {
         { guideName: 'Basics' },
         { guideName: 'HTML' },
         { guideName: 'CSS' },
+        { guideName: 'JS' },
+        { guideName: 'React'},
+        { guideName: 'Node'}
       ]);
     });
 };
