@@ -1,6 +1,6 @@
 
 exports.seed = function(knex, Promise) {
-  return knex('guides').truncate()
+  return knex('guides').del()
     .then(function () {
       return knex('guides').insert([
         { guideName: 'Basics' },
