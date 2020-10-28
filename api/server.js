@@ -4,7 +4,7 @@ const helmet = require('helmet');
 const cors = require('cors');
 const session = require('express-session');
 const knexSessionStore = require('connect-session-knex')(session);
-const app = express();
+const server = express();
 
 const tipsRouter = require('../routers/tipsRouter.js');
 const guidesRouter = require('../routers/guidesRouter.js');
@@ -36,28 +36,29 @@ const sessionConfig = {
 // server.use(express.json());
 // server.use(cors());
 
-app.use(helmet());
-app.use(express.json());
-app.use(cors());
+server.use(helmet());
+server.use(express.json());
+server.use(cors());
 
 // server.use(session(sessionConfig));
 
-app.use(session(sessionConfig));
+server.use(session(sessionConfig));
 
 // server.use('/api/tips', tipsRouter);
 // server.use('/api/guides', guidesRouter);
 
-app.use('/api/tips', tipsRouter);
-app.use('/api/guides', guidesRouter);
+server.use('/api/tips', tipsRouter);
+server.use('/api/guides', guidesRouter);
 
-app.use(express.static('public'));
+server.use(express.static('public'));
 
-// server.use('/', (req, res) => {
-//     res.send(`
-//         <h2>Hey your API is up</h2>
-//     `);
-//   });
+server.get('/', (req, res) => {
+    res.send(`
+        <h2>Help Guide Database Api</h2>
+        <p>Welcome to Lambda's Help Guide Api</p>
+    `);
+});
 
-server.listen(6000, () =>
-  console.log("Server running on http://localhost:6000")
-);
+
+
+module.exports = server;
