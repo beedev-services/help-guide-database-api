@@ -32,20 +32,15 @@ const sessionConfig = {
     )
 };
 
-// server.use(helmet());
-// server.use(express.json());
-// server.use(cors());
+
 
 server.use(helmet());
 server.use(express.json());
 server.use(cors());
 
-// server.use(session(sessionConfig));
 
 server.use(session(sessionConfig));
 
-// server.use('/api/tips', tipsRouter);
-// server.use('/api/guides', guidesRouter);
 
 server.use('/api/tips', tipsRouter);
 server.use('/api/guides', guidesRouter);
