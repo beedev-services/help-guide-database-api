@@ -58,4 +58,6 @@ app.use(express.static('public'));
 //     `);
 //   });
 
-module.exports = app;
+server.listen(6000, () =>
+  console.log("Server running on http://localhost:6000")
+);
