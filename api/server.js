@@ -4,11 +4,12 @@ const helmet = require('helmet');
 const cors = require('cors');
 const session = require('express-session');
 const knexSessionStore = require('connect-session-knex')(session);
-const app = express();
+
 
 const tipsRouter = require('../routers/tipsRouter.js');
 const guidesRouter = require('../routers/guidesRouter.js');
 
+const app = express();
 // const server = express();
 
 const sessionConfig = {
